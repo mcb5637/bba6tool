@@ -53,7 +53,7 @@ DirStructEntry *readFolder(char *dirname, int *counter, int *strLenCnt, DirStruc
 			int fileExt = 0;
 			for (; char c = file.path[2 + len]; len++)
 			{
-				entry->path[len] = c == '/' ? '\\' : c;
+				entry->path[len] = c == '/' ? '\\' : tolower(c);
 				if (c == '.')
 					fileExt = len + 1;
 			}
@@ -71,7 +71,8 @@ DirStructEntry *readFolder(char *dirname, int *counter, int *strLenCnt, DirStruc
 					!strcmp("dff", &entry->path[fileExt]) ||
 					!strcmp("spt", &entry->path[fileExt]) ||
 					!strcmp("dds", &entry->path[fileExt]) ||
-					!strcmp("txt", &entry->path[fileExt]))
+					!strcmp("txt", &entry->path[fileExt]) ||
+					!strcmp("cs", &entry->path[fileExt]))
 					entry->type = ELM_COMPRESSED;
 			}
 
